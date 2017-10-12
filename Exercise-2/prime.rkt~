@@ -1,0 +1,9 @@
+#lang racket
+
+(define (prime? x)
+  (define (is-prime-rec iter end)
+    (cond
+      [(> iter end) #t]
+      [(= 0 (modulo x iter)) #f]
+      [#t (is-prime-rec (+ 1 iter) end)]))
+  (if (< x 2) #f (is-prime-rec 2 (sqrt x))))
