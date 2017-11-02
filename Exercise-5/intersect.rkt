@@ -9,16 +9,10 @@
         [(null? remaining) #f]
         [else (contains remaining elem)])))
 
-  (define (creator list result)
-    (let* ([current (car list)]
-           [remaining (cdr list)])
-      (cond
-        [(contains set2 current)
-         (if
-          (null? remaining)
-          (cons current result)
-          (creator remaining (cons current result)))]
-        [(null? remaining) result]
-        [else (creator remaining result)])))
+  (define (creator list)
+    (cond
+      [(null? list) '()]
+      [(contains set2 (car list)) (cons (car list) (creator (cdr list)))]
+      [else (creator (cdr list))]))
 
-  (creator set1 '()))
+  (creator set1))

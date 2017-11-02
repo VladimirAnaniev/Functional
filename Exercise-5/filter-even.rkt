@@ -4,11 +4,9 @@
   (filter even? list))
 
 (define (my-filter-even list)
-  (define (creator list res)
-    (let* ([curr (car list)]
-           [rest (cdr list)])
+  (define (creator list)
       (cond
-        [(null? rest) (if (even? curr) (cons curr res) res)]
-        [(even? curr) (creator rest (cons curr res))]
-        [else (creator rest res)])))
-  (creator list '()))
+        [(null? list) '()]
+        [(even? (car list)) (cons (car list) (creator (cdr list)))]
+        [else (creator (cdr list))]))
+  (creator list))
