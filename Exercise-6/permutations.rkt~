@@ -1,0 +1,6 @@
+#lang racket
+
+; Mind-bending
+(define (perm lst)
+  (permutations lst))
+  
