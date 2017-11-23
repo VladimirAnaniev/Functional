@@ -8,7 +8,7 @@
     [(null? mtx) '()]
     [else (cons (caar mtx) (get-diagonal (reduce-mat mtx)))]))
 
-(define (transpose mtx)
+(define (rotate mtx)
   (foldl
     (λ (x acc)
          (cond
@@ -16,7 +16,8 @@
            [else (map cons x acc)]))
     '() mtx))
 
+
 (define (diagonal-product mtx)
-  (foldl (λ (x y acc) (+ acc (* x y))) 0 (get-diagonal mtx) (reverse (get-diagonal (transpose mtx)))))
+  (foldl (λ (x y acc) (+ acc (* x y))) 0 (get-diagonal mtx) (reverse (get-diagonal (rotate mtx)))))
 
 (diagonal-product '((1 2 3) (4 5 6) (7 8 9)))
