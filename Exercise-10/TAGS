@@ -1,16 +1,0 @@
-
-./ex10.hs,325
-main:main0,1
-main main1,2
-count_digits count_digits4,5
-count_digits count_digits5,6
-sum_digits sum_digits9,10
-sum_digits sum_digits10,11
-sum_digits_iter:sum_digits_iter13,14
-sum_digits_iter sum_digits_iter14,15
-prime prime20,21
-prime prime21,22
-pow pow32,33
-pow pow33,34
-rev rev36,37
-rev rev37,38
