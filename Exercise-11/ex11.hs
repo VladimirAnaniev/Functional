@@ -27,6 +27,17 @@ areCollatzSeq :: [Int] -> Bool
 areCollatzSeq (x:[]) = True
 areCollatzSeq xs@(x:y:_) = if collatz x == y then areCollatzSeq (tail xs) else False
 
+--TODO
 --merge :: Ord a => [a] -> [a] -> [a]
 --merge xs ys
 --  | firstx < firstY
+
+rle :: [Char] -> [(Char, Int)]
+rle [] = []
+rle xs = helper (head xs) 1 (tail xs)
+  where
+  helper :: Char -> Int -> [Char] -> [(Char, Int)]
+  helper last n (x:xs)
+    | last == x = helper x (n + 1) xs
+    | otherwise = (last, n):helper x 1 xs
+  helper last n [] = [(last, n)]

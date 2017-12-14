@@ -1,15 +1,0 @@
-
-./ex11.hs,295
-main main0,1
-main main1,2
-maximize maximize4,5
-maximize maximize5,6
-digits digits10,11
-digits digits11,12
-times times15,16
-times times16,17
-collatz collatz19,20
-collatz collatz20,21
-areCollatzSeq areCollatzSeq25,26
-areCollatzSeq areCollatzSeq26,27
---merge --merge29,30
