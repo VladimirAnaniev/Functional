@@ -8,6 +8,7 @@ gameOfLife state = unique survivors
     unique :: [(Int, Int)] -> [(Int, Int)]
     unique = uniqueHelper []
       where
+        uniqueHelper :: [(Int, Int)] -> [(Int, Int)] -> [(Int, Int)]
         uniqueHelper seen [] = seen
         uniqueHelper seen (x:rest)
           | x `elem` seen = uniqueHelper seen rest
@@ -16,7 +17,7 @@ gameOfLife state = unique survivors
     survivors = willSurvive [(i+di, j+dj) | (i, j) <- state, di <- [-1..1], dj <- [-1..1]]
 
     willSurvive :: [(Int, Int)] -> [(Int, Int)]
-    willSurvive xs = map (\(_, pos) -> pos) (filter (\(lod, _) -> lod) (zip (map liveOrDie xs) xs))
+    willSurvive xs = [pos | (lod, pos) <- (zip (map liveOrDie xs) xs), lod]
 
     liveOrDie :: (Int, Int) -> Bool
     liveOrDie (x, y)
