@@ -1,6 +1,6 @@
 main :: IO()
 main = do
-  print "123"
+  print $ gameOfLife [(0,1),(1,2),(2,0),(2,1),(2,2)]
 
 gameOfLife :: [(Int, Int)] -> [(Int, Int)]
 gameOfLife state = unique survivors
@@ -14,14 +14,22 @@ gameOfLife state = unique survivors
           | x `elem` seen = uniqueHelper seen rest
           | otherwise = uniqueHelper (seen ++ [x]) rest
 
-    survivors = willSurvive [(i+di, j+dj) | (i, j) <- state, di <- [-1..1], dj <- [-1..1]]
+    survivors :: [(Int, Int)]
+    survivors = willSurvive positions
+
+    positions :: [(Int, Int)]
+    positions = [(i+di, j+dj) | (i, j) <- state, di <- [-1..1], dj <- [-1..1]]
 
     willSurvive :: [(Int, Int)] -> [(Int, Int)]
-    willSurvive xs = [pos | (lod, pos) <- (zip (map liveOrDie xs) xs), lod]
+    willSurvive xs = [pos | pos <- xs, liveOrDie pos]
 
     liveOrDie :: (Int, Int) -> Bool
     liveOrDie (x, y)
       | length neighbours == 3 || length neighbours == 4 = True
       | otherwise = False
         where
-          neighbours = [(i, j) | (i, j) <- state, i >= x - 1 && i <= x + 1 && j >= y - 1 && j <= y + 1]
+          neighbours :: [(Int, Int)]
+          neighbours = [pair | pair <- state, check pair]
+
+          check :: (Int, Int) -> Bool
+          check (i, j) = i >= x - 1 && i <= x + 1 && j >= y - 1 && j <= y + 1
